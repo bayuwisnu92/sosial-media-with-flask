@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="text-center py-5" style="background-color: #797a7a; color: antiquewhite;">
+    <h1 class="display-4">Selamat Datang di Blog-BOOK{% if username %} {{ username }}{% endif %}!</h1>
+    <p class="lead">Tempat berbagi cerita, ide, dan inspirasi dari berbagai penulis.</p>
+    <a href="/post" class="btn btn-dark btn-lg mt-3">Beranda</a>
+</div>
+
+<!-- About Section -->
+<section class="my-5">
+    <div class="container">
+        <h2 class="text-center">Tentang Kami</h2>
+        <p class="text-center">
+            Kami adalah komunitas penulis yang ingin berbagi pengetahuan, pengalaman, dan inspirasi. Dapatkan insight baru setiap hari.
+        </p>
+    </div>
+</section>
+
+<!-- Latest Posts Section -->
+<section class="py-5">
+    <div class="container">
+        <h1 class="text-center mb-5">Postingan Terbaru Kami</h1>
+        <ul class="list-unstyled">
+            {% for post in home_data.post %}
+            <li class="mb-4">
+                <div class="card h-100">
+                    <img src="{{ url_for('static', filename='uploads/' + (post.gambar if post.gambar else 'img/imegenone.jpg')) }}" 
+                         class="card-img-top" 
+                         alt="Post Image" 
+                         style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{{ url_for('main.post_detail_route', post_id=post.id) }}">{{ post.title }}</a>
+                        </h5>
+                        <p class="card-text">{{ post.content | safe | truncate(100) }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            Penulis: {{ post.username }} | Kategori: {{ post.category_name }}
+                        </small>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+
+<!-- Featured Users Section -->
+<section class="my-5">
+    <div class="container">
+        <h2 class="text-center">Penulis Kami</h2>
+        <ul class="list-group list-group-flush">
+            {% for user in home_data.users %}
+                <li class="list-group-item">
+                    <strong>{{ user.username }}</strong> - <span class="text-muted">{{ user.email }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+
+{% endblock %}

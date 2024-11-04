@@ -1,0 +1,26 @@
+.card a{
+    text-decoration: none;
+    color: rgb(203, 157, 247) ;
+    
+    
+}
+a:hover{
+    transition: 1.3s;
+    color: white;
+}
+
+.card{
+    padding: 20px;
+    height: 100%;
+    background-color: rgb(133, 128, 128);
+}
+.card img:hover{
+    padding: 10px;
+    transition: 1.3s;
+} 
+.card p{
+    color: grey;
+}
+.text-muted{
+    color: white;
+}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Chatrooms{% endblock %}
+
+{% block content %}
+<style>
+    /* Main container */
+    h2 {
+        font-size: 1.8em;
+        color: #075e54;
+        margin-bottom: 15px;
+    }
+
+    /* Chatroom list */
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    ul li {
+        margin-bottom: 10px;
+    }
+    ul li a {
+        display: block;
+        padding: 12px 20px;
+        color: #075e54;
+        text-decoration: none;
+        background-color: #e5ddd5;
+        border-radius: 8px;
+        transition: background-color 0.2s ease;
+    }
+    ul li a:hover {
+        background-color: #c8e0d4;
+    }
+
+    /* New chatroom link */
+    a.new-chatroom {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        color: white;
+        background-color: #128c7e;
+        text-decoration: none;
+        border-radius: 20px;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    a.new-chatroom:hover {
+        background-color: #075e54;
+    }
+</style>
+
+<div class="container">
+    <h2>Available Chatrooms</h2>
+
+<ul>
+    {% for chatroom in chatrooms %}
+        <li><a href="{{ url_for('main.personal_chat', room_id=chatroom.id) }}">{{ chatroom.room_name }}</a></li>
+    {% endfor %}
+</ul>
+
+<a href="{{ url_for('main.create_chatroom') }}" class="new-chatroom">Create a New Chatroom</a>
+</div>
+{% endblock %}
